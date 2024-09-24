@@ -1,0 +1,151 @@
+
+                                                                        TEAM NAME:ᑌᑭᑕOᗰIᑎG EᑎGIᑎEEᖇᔕ
+TITLE NAME : COLLABORATIVE HUB
+
+TEAM MEMBERS:
+K.SUKUMAR
+M.VENKAIAH
+G.SWARNA
+Y.SWATHI
+M.SUJATHA
+
+SOURCE CODE:
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collaborate Hub</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4; }
+        header { background: #35424a; color: #ffffff; padding: 20px 0; text-align: center; }
+        nav ul { list-style: none; padding: 0; }
+        nav ul li { display: inline; margin: 0 15px; }
+        nav ul li a { color: #ffffff; text-decoration: none; }
+        main { padding: 20px; }
+        section { margin: 20px 0; padding: 20px; background: #ffffff; border-radius: 5px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; }
+        .close-button { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close-button:hover, .close-button:focus { color: black; text-decoration: none; cursor: pointer; }
+        form { display: flex; flex-direction: column; }
+        input, textarea { margin: 10px 0; padding: 10px; border: 1px solid #ccc; border-radius: 5px; }
+        button { padding: 10px; background-color: #35424a; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        button:hover { background-color: #2c3e50; }
+        .project-list { margin-top: 20px; }
+        .project-item { padding: 10px; background: #e8e8e8; border-radius: 5px; margin: 10px 0; }
+        footer { text-align: center; padding: 10px; background: #35424a; color: white; position: relative; bottom: 0; width: 100%; }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Collaborate Hub</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="home">
+            <h2>Welcome to Collaborate Hub</h2>
+            <p>Your platform for collaboration and teamwork. Explore, connect, and innovate together!</p>
+            <button id="openModal">Join a Project</button>
+        </section>
+        
+        <section id="about">
+            <h2>About Us</h2>
+            <p>We connect people and ideas to foster innovation and collaboration. Our mission is to provide tools and resources that facilitate effective teamwork.</p>
+        </section>
+        
+        <section id="projects">
+            <h2>Available Projects</h2>
+            <div class="project-list" id="projectList"></div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <form id="contactForm">
+                <input type="text" id="name" placeholder="Your Name" required>
+                <input type="email" id="email" placeholder="Your Email" required>
+                <textarea id="message" placeholder="Your Message" required></textarea>
+                <button type="submit">Send</button>
+            </form>
+        </section>
+
+        <section id="faq">
+            <h2>Frequently Asked Questions</h2>
+            <div>
+                <h3>Q: How do I join a project?</h3>
+                <p>A: Click on the "Join a Project" button on the home page and enter the project name.</p>
+                <h3>Q: Can I create my own project?</h3>
+                <p>A: Yes, we are working on adding a feature for users to create their own projects.</p>
+            </div>
+        </section>
+    </main>
+
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>Join a Project</h2>
+            <input type="text" id="projectName" placeholder="Project Name" required>
+            <button id="joinProject">Join</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Collaborate Hub</p>
+    </footer>
+
+    <script>
+        const projects = [];
+
+        document.getElementById('openModal').onclick = function() {
+            document.getElementById('modal').style.display = 'block';
+        }
+
+        document.querySelector('.close-button').onclick = function() {
+            document.getElementById('modal').style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target === document.getElementById('modal')) {
+                document.getElementById('modal').style.display = 'none';
+            }
+        }
+
+        document.getElementById('contactForm').onsubmit = function(event) {
+            event.preventDefault();
+            alert('Message sent! We will get back to you soon.');
+            this.reset();
+        }
+
+        document.getElementById('joinProject').onclick = function() {
+            const projectName = document.getElementById('projectName').value;
+            if (projectName) {
+                projects.push(projectName);
+                updateProjectList();
+                document.getElementById('modal').style.display = 'none';
+                document.getElementById('projectName').value = ''; 
+            } else {
+                alert('Please enter a project name.');
+            }
+        }
+
+        function updateProjectList() {
+            const projectList = document.getElementById('projectList');
+            projectList.innerHTML = '';
+            projects.forEach((project, index) => {
+                const projectItem = document.createElement('div');
+                projectItem.classList.add('project-item');
+                projectItem.textContent = `${index + 1}. ${project}`;
+                projectList.appendChild(projectItem);
+            });
+        }
+    </script>
+</body>
+</html>
